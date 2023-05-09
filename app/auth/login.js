@@ -1,7 +1,11 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
 
 const Login = () => {
+
+    const router = useRouter()
 
     const [process, setProcess] = React.useState('register');
 
@@ -10,17 +14,24 @@ const Login = () => {
 
     const sendRegisterData = async () => {
         try {
-            const response = await fetch('http://localhost:8080/register', {
+            const response = await fetch('https://circle-backend-git-main-s-guettner.vercel.app/register', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    mail: "testusweeeasdasdsde@mail.com",
+                    mail: "supercoasdaaaaaaaaaasddae@mail.com",
                     password: "Passwort1!"
                 })
             })
-            console.log(await response.json())
+            if (response.ok) {
+                const userID = await response.json()
+                await AsyncStorage.setItem('userID', userID);
+                const value = await AsyncStorage.getItem('userID');
+                router.push('/home/feed')
+            } else {
+                console.log('first')
+            }
         } catch (err) {
             console.log(err)
         }
