@@ -12,7 +12,6 @@ const Onboarding = () => {
             setTimeout(async () => {
                 if (AsyncStorage !== undefined) {
                     try {
-                        // Check if user information exists
                         const user = await AsyncStorage.getItem('user');
                         if (user !== null) {
                             console.log('User logged in')
@@ -29,7 +28,7 @@ const Onboarding = () => {
                 }
             }, 5000)
         }
-        getToken(); // Retrieve the JWT token
+        getToken();
     }, [])
 
     return (

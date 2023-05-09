@@ -1,7 +1,7 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Login = () => {
 
@@ -9,8 +9,20 @@ const Login = () => {
 
     const [process, setProcess] = React.useState('register');
 
-    const [mail, onChangeText] = React.useState('johndoe@mail.com');
-    const [password, onChangeNumber] = React.useState('somepassword123');
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmationPassword, setConfirmationPassword] = useState('');
+
+    useEffect(() => {
+        const deleteKey = async () => {
+            try {
+                await AsyncStorage.removeItem('userID');
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        deleteKey()
+    }, [])
 
     const sendRegisterData = async () => {
         try {
@@ -20,17 +32,18 @@ const Login = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    mail: "supercoasdaaaaaaaaaasddae@mail.com",
-                    password: "Passwort1!"
+                    mail: mail,
+                    password: password,
+                    confirmationPassword: confirmationPassword
                 })
             })
             if (response.ok) {
                 const userID = await response.json()
                 await AsyncStorage.setItem('userID', userID);
-                const value = await AsyncStorage.getItem('userID');
                 router.push('/home/feed')
-            } else {
-                console.log('first')
+            } else if (!response.ok) {
+                const json = await response.json()
+                console.log(json.errors[0].msg)
             }
         } catch (err) {
             console.log(err)
@@ -43,6 +56,9 @@ const Login = () => {
                 <View style={styles.loginForm}>
                     <Text>Register</Text>
                     <TextInput
+                        onChangeText={e => {
+                            setMail(e)
+                        }}
                         style={styles.input}
                         editable
                         placeholder='johndoe@mail.com'
@@ -50,6 +66,9 @@ const Login = () => {
                     />
 
                     <TextInput
+                        onChangeText={e => {
+                            setPassword(e)
+                        }}
                         secureTextEntry={true}
                         style={styles.input}
                         editable
@@ -58,6 +77,9 @@ const Login = () => {
                     />
 
                     <TextInput
+                        onChangeText={e => {
+                            setConfirmationPassword(e)
+                        }}
                         secureTextEntry={true}
                         style={styles.input}
                         editable
@@ -130,3 +152,4 @@ const styles = StyleSheet.create({
 })
 
 export default Login
+

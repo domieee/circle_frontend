@@ -1,13 +1,26 @@
 {
   "expo": {
     "scheme": "acme",
-    "web": { "bundler": "metro" },
+    "web": {
+      "bundler": "metro"
+    },
     "ios": {
       "config": {
         "infoPlist": {
           "NSAllowsArbitraryLoads": true
         }
+      },
+      "bundleIdentifier": "com.domieee.circle"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "eda4f94e-eb89-4030-8b23-1f657e4590dc"
       }
+    },
+    "owner": "domieee",
+    "slug": "circle",
+    "android": {
+      "package": "com.domieee.circle"
     }
   }
 }
