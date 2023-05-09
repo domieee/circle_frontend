@@ -1,6 +1,13 @@
 {
   "expo": {
     "scheme": "acme",
-    "web": { "bundler": "metro" }
+    "web": { "bundler": "metro" },
+    "ios": {
+      "config": {
+        "infoPlist": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    }
   }
 }
