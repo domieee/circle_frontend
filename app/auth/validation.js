@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
+import { SafeAreaView, TextInput, StyleSheet, Image } from 'react-native'
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
@@ -24,11 +24,17 @@ const validation = () => {
 
     return (
         <>
-            {process === 'register' ?
-                <Register process={process} setProcess={setProcess} />
-                :
-                <Login process={process} setProcess={setProcess} />
-            }
+            <SafeAreaView
+                style={styles.center}>
+                <Image
+                    source={require('../assets/img/circle_logo.png')}
+                />
+                {process === 'register' ?
+                    <Register process={process} setProcess={setProcess} />
+                    :
+                    <Login process={process} setProcess={setProcess} />
+                }
+            </SafeAreaView>
         </>
     )
 }
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
     loginForm: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+
     },
     input: {
         width: 300,
@@ -48,6 +54,12 @@ const styles = StyleSheet.create({
     },
     login: {
         fontSize: 10
+    },
+    center: {
+        flex: 1,
+
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 

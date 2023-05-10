@@ -1,7 +1,8 @@
-import { View, Text } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Logo from '../assets/img/circle_logo.png'
 import * as Keychain from 'react-native-keychain';
 
 const Onboarding = () => {
@@ -32,10 +33,21 @@ const Onboarding = () => {
     }, [])
 
     return (
-        <View>
-            <Text>Onboarding</Text>
+        <View
+            style={styles.center}>
+            <Image
+                source={require('../assets/img/circle_logo.png')}
+            />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})
 
 export default Onboarding

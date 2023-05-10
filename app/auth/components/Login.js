@@ -49,16 +49,16 @@ const Login = ({ setProcess }) => {
                 style={styles.input}
                 editable
                 placeholder='Password'
-                placeholderTextColor="#808080"
-            />
+                placeholderTextColor="#808080" />
 
             <Button onPress={() => sendLoginData()} title='Login' />
 
             <Text>
                 Not a member?
             </Text>
+
             <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
-                <Text style={styles.login}>Create  Account</Text>
+                <Text style={styles.login}>Create Account</Text>
             </TouchableOpacity>
         </View>
     );
