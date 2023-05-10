@@ -10,7 +10,7 @@ const Login = ({setProcess}) => {
 
     const sendLoginData = async () => {
         try {
-            const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/register', {
+            const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/login', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -18,7 +18,6 @@ const Login = ({setProcess}) => {
                 body: JSON.stringify({
                     mail: mail,
                     password: password,
-                    confirmPassword: confirmationPassword
                 })
             })
             console.log(await response.json())
@@ -31,7 +30,7 @@ const Login = ({setProcess}) => {
                 setErrorMsg(error.msg)
             }
         } catch (err) {
-            console.log(err, '55')
+            console.log(err, errorMsg)
         }
     }
     return (
@@ -51,7 +50,7 @@ const Login = ({setProcess}) => {
                         placeholderTextColor="#808080"
                     />
 
-                    <Button title='Login' />
+                    <Button onPress={() => sendLoginData()} title='Login' />
 
                     <Text>
                         Not a member?
