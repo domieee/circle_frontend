@@ -24,7 +24,8 @@ const Register = ({ setProcess }) => {
                     password: password,
                     confirmPassword: confirmationPassword
                 })
-            });
+            })
+
             const responseData = await response.json(); // Save response data to a variable
             console.log(responseData); // Log the response data
 

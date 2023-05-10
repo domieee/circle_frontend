@@ -1,16 +1,28 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { ScrollView, Text, StyleSheet, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Feed = () => {
 
     const [user, setUser] = useState()
+    const [feed, setFeed] = useState([])
 
     useEffect(() => {
         const getUserIdFromStorage = async () => {
             try {
-                const value = await AsyncStorage.getItem('userID');
-                setUser(value)
+                const userID = await AsyncStorage.getItem('userID');
+                const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/get-feed', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        userId: userID
+                    })
+                })
+                const json = await response.json()
+                setFeed(json)
+                setUser(userID)
             } catch (error) {
                 console.log(error)
             }
@@ -19,17 +31,35 @@ const Feed = () => {
     }, [])
 
     return (
-        <View style={styles.login}>
-            <Text>{user}</Text>
-        </View>
+        <>
+            <StatusBar
+                animated={true}
+                backgroundColor="#000"
+                barStyle={'default'}
+                showHideTransition={'fade'}
+                hidden={true}
+            />
+            <ScrollView style={styles.login}>
+                {feed.map(post => {
+                    console.log(post)
+                    return (
+                        <>
+                            <Text>{post.userName}</Text>
+                            <Text>{post.jobTitle}</Text>
+                            <Text>{post.comments.length}</Text>
+                            <Text>{post.likes}</Text>
+                        </>
+                    )
+                })}
+            </ScrollView>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     login: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+
     }
 })
 

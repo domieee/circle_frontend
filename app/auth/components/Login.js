@@ -6,9 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({ setProcess }) => {
 
     const [errorMsg, setErrorMsg] = useState('')
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmationPassword, setConfirmationPassword] = useState('');
+    const [mail, setMail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmationPassword, setConfirmationPassword] = useState('')
 
     const router = useRouter()
 
