@@ -4,20 +4,12 @@
     "web": {
       "bundler": "metro"
     },
-    "ios": {
-      "config": {
-        "infoPlist": {
-          "NSAllowsArbitraryLoads": true
-        }
-      },
-      "bundleIdentifier": "com.domieee.circle"
-    },
     "extra": {
       "eas": {
-        "projectId": "eda4f94e-eb89-4030-8b23-1f657e4590dc"
+        "projectId": "734e1136-f5e1-4e48-b72d-8483b3da8e6a"
       }
     },
-    "owner": "domieee",
+    "owner": "sveng",
     "slug": "circle",
     "android": {
       "package": "com.domieee.circle"
