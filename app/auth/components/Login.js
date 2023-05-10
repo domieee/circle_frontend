@@ -38,6 +38,7 @@ const Login = ({ setProcess }) => {
         <View style={styles.loginForm}>
             <Text>Login</Text>
             <TextInput
+                onChangeText={(e) => setMail(e)}
                 keyboardType='email-address'
                 style={styles.input}
                 editable
@@ -45,6 +46,7 @@ const Login = ({ setProcess }) => {
                 placeholderTextColor="#808080" />
 
             <TextInput
+                onChangeText={(e) => setPassword(e)}
                 secureTextEntry={true}
                 style={styles.input}
                 editable
