@@ -1,6 +1,7 @@
 import { ScrollView, Text, StyleSheet, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Post from '.././auth/components/Post.js'
 
 const Feed = () => {
 
@@ -32,13 +33,7 @@ const Feed = () => {
 
     return (
         <>
-            <StatusBar
-                animated={true}
-                backgroundColor="#000"
-                barStyle={'default'}
-                showHideTransition={'fade'}
-                hidden={true}
-            />
+            
             <ScrollView style={styles.login}>
                 {feed.map(post => {
                     console.log(post)
