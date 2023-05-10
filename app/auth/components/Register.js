@@ -1,13 +1,18 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
-const Register = () => {
+import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const Register = ({ setProcess }) => {
 
     const [errorMsg, setErrorMsg] = useState('')
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
 
-    const sendRegisterData = async ({ process, setProcess }) => {
+    const router = useRouter()
+
+    const sendRegisterData = async () => {
         try {
             const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/register', {
                 method: 'POST',
@@ -19,21 +24,20 @@ const Register = () => {
                     password: password,
                     confirmPassword: confirmationPassword
                 })
-            })
-            console.log(await response.json())
+            });
+            const responseData = await response.json(); // Save response data to a variable
+            console.log(responseData); // Log the response data
+
             if (response.ok) {
-                const userID = await response.json()
-                await AsyncStorage.setItem('userID', userID);
-                router.push('/home/feed')
-            } else if (response.statusCode === 400) {
-                const error = await response.json()
-                setErrorMsg(error.msg)
+                await AsyncStorage.setItem('userID', responseData);
+                router.push('/home/feed');
+            } else if (response.status === 400) {
+                setErrorMsg(responseData.msg);
             }
         } catch (err) {
-            console.log(err, '55')
+            console.log(err, '55');
         }
-    }
-
+    };
     return (
         <View style={styles.loginForm}>
             <Text>Register</Text>
@@ -73,7 +77,9 @@ const Register = () => {
                 onPress={() => sendRegisterData()}
                 title='Create Account' />
 
-            {errorMsg}
+            <Text>
+                {errorMsg}
+            </Text>
 
             <Text>
                 Already registered?
