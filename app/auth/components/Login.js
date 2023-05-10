@@ -1,5 +1,7 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
+import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ setProcess }) => {
 
@@ -7,6 +9,8 @@ const Login = ({ setProcess }) => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
+
+    const router = useRouter()
 
     const sendLoginData = async () => {
         try {
