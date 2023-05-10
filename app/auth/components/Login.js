@@ -1,14 +1,14 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
 
-const Register = ({setProcess}) => {
+const Login = ({setProcess}) => {
 
     const [errorMsg, setErrorMsg] = useState('')
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
 
-    const sendRegisterData = async () => {
+    const sendLoginData = async () => {
         try {
             const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/register', {
                 method: 'POST',
@@ -35,57 +35,31 @@ const Register = ({setProcess}) => {
         }
     }
     return (
-        <View style={styles.loginForm}>
-            <Text>Register</Text>
-            <TextInput
-                onChangeText={e => {
-                    setMail(e)
-                }}
-                style={styles.input}
-                editable
-                placeholder='johndoe@mail.com'
-                placeholderTextColor="#808080"
-            />
+                <View style={styles.loginForm}>
+                    <Text>Login</Text>
+                    <TextInput
+                        style={styles.input}
+                        editable
+                        placeholder='johndoe@mail.com'
+                        placeholderTextColor="#808080" />
 
-            <TextInput
-                onChangeText={e => {
-                    setPassword(e)
-                }}
-                secureTextEntry={true}
-                style={styles.input}
-                editable
-                placeholder='Password'
-                placeholderTextColor="#808080"
-            />
+                    <TextInput
+                        secureTextEntry={true}
+                        style={styles.input}
+                        editable
+                        placeholder='Password'
+                        placeholderTextColor="#808080"
+                    />
 
-            <TextInput
-                onChangeText={e => {
-                    setConfirmationPassword(e)
-                }}
-                secureTextEntry={true}
-                style={styles.input}
-                editable
-                placeholder='Confirm password'
-                placeholderTextColor="#808080"
-            />
+                    <Button title='Login' />
 
-            <Button
-                onPress={() => sendRegisterData()}
-                title='Create Account' />
-
-            {errorMsg}
-
-            <Text>
-                Already registered?
-            </Text>
-
-            <TouchableOpacity onPress={() => {
-                setProcess('login')
-            }} style={styles.appButtonContainer}>
-                <Text style={styles.login}>Sign in</Text>
-            </TouchableOpacity>
-
-        </View>
+                    <Text>
+                        Not a member?
+                    </Text>
+                    <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
+                        <Text style={styles.login}>Create Account</Text>
+                    </TouchableOpacity>
+                </View>
     );
 }
 
@@ -107,4 +81,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Register;
+export default Login;
