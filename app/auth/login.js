@@ -26,7 +26,7 @@ const Login = () => {
 
     const sendRegisterData = async () => {
         try {
-            const response = await fetch('https://circle-backend-git-main-s-guettner.vercel.app/register', {
+            const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/register', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -34,19 +34,19 @@ const Login = () => {
                 body: JSON.stringify({
                     mail: mail,
                     password: password,
-                    confirmationPassword: confirmationPassword
+                    confirmPassword: confirmationPassword
                 })
             })
+            console.log(await response.json())
             if (response.ok) {
                 const userID = await response.json()
                 await AsyncStorage.setItem('userID', userID);
                 router.push('/home/feed')
-            } else if (!response.ok) {
-                const json = await response.json()
-                console.log(json.errors[0].msg)
+            } else if (response.statusCode === 400) {
+                console.log(await response.json())
             }
         } catch (err) {
-            console.log(err)
+            console.log(err, '55')
         }
     }
 
