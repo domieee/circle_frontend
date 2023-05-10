@@ -8,7 +8,6 @@ const Login = ({ setProcess }) => {
     const [errorMsg, setErrorMsg] = useState('')
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmationPassword, setConfirmationPassword] = useState('');
 
     const router = useRouter()
 
@@ -26,7 +25,6 @@ const Login = ({ setProcess }) => {
             })
             if (response.ok) {
                 const userID = await response.json()
-                console.log(userID)
                 await AsyncStorage.setItem('userID', userID);
                 router.push('/home/feed')
             } else if (response.statusCode === 400) {
