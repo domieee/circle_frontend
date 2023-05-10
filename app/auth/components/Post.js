@@ -4,7 +4,7 @@ import React from 'react'
 export default function Post() {
   return (
       <View>
-          <Image source={{ uri: 'https//picsum.photos/768' }} />
+          <Image  source={{ uri: 'https//picsum.photos/768' }} />
 
           <Text>Post</Text>
       </View>
