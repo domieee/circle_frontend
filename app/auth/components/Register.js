@@ -7,7 +7,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
 
-    const sendRegisterData = async () => {
+    const sendRegisterData = async ({ process, setProcess }) => {
         try {
             const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/register', {
                 method: 'POST',
@@ -33,6 +33,7 @@ const Register = () => {
             console.log(err, '55')
         }
     }
+
     return (
         <View style={styles.loginForm}>
             <Text>Register</Text>
