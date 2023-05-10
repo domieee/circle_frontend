@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Post from '.././auth/components/Post.js'
 
 const Feed = () => {
 
@@ -20,6 +21,7 @@ const Feed = () => {
 
     return (
         <View style={styles.login}>
+            <Post />
             <Text>{user}</Text>
         </View>
     )
