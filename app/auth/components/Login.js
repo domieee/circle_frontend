@@ -38,7 +38,7 @@ const Login = ({ setProcess }) => {
         <View style={styles.loginForm}>
             <Text>Login</Text>
             <TextInput
-                keyboardType='email'
+                keyboardType='email-address'
                 style={styles.input}
                 editable
                 placeholder='johndoe@mail.com'
@@ -58,7 +58,7 @@ const Login = ({ setProcess }) => {
                 Not a member?
             </Text>
             <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
-                <Text style={styles.login}>Create Account</Text>
+                <Text style={styles.login}>Create  Account</Text>
             </TouchableOpacity>
         </View>
     );
