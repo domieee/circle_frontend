@@ -3,8 +3,9 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 import Register from './components/Register';
+import Login from './components/Login'
 
-const Login = () => {
+const validation = () => {
 
     const router = useRouter()
 
@@ -31,31 +32,7 @@ const Login = () => {
             {process === 'register' ?
                 <Register process={process} setProcess={setProcess} />
                 :
-                <View style={styles.loginForm}>
-                    <Text>Login</Text>
-                    <TextInput
-                        style={styles.input}
-                        editable
-                        placeholder='johndoe@mail.com'
-                        placeholderTextColor="#808080" />
-
-                    <TextInput
-                        secureTextEntry={true}
-                        style={styles.input}
-                        editable
-                        placeholder='Password'
-                        placeholderTextColor="#808080"
-                    />
-
-                    <Button title='Login' />
-
-                    <Text>
-                        Not a member?
-                    </Text>
-                    <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
-                        <Text style={styles.login}>Create Account</Text>
-                    </TouchableOpacity>
-                </View>
+                <Login process={process} setProcess={setProcess}/>
             }
         </>
     )
@@ -79,5 +56,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login
+export default validation
 
