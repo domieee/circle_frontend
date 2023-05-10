@@ -11,9 +11,6 @@ const validation = () => {
 
     const [process, setProcess] = React.useState('register');
 
-
-
-
     useEffect(() => {
         const deleteKey = async () => {
             try {
@@ -25,14 +22,12 @@ const validation = () => {
         deleteKey()
     }, [])
 
-
-
     return (
         <>
             {process === 'register' ?
                 <Register process={process} setProcess={setProcess} />
                 :
-                <Login process={process} setProcess={setProcess}/>
+                <Login process={process} setProcess={setProcess} />
             }
         </>
     )

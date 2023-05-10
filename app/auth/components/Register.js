@@ -38,6 +38,7 @@ const Register = ({ setProcess }) => {
             console.log(err, '55');
         }
     };
+
     return (
         <View style={styles.loginForm}>
             <Text>Register</Text>
@@ -77,7 +78,7 @@ const Register = ({ setProcess }) => {
                 onPress={() => sendRegisterData()}
                 title='Create Account' />
 
-            <Text>
+            <Text style={styles.error}>
                 {errorMsg}
             </Text>
 
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
     },
     login: {
         fontSize: 10
+    },
+    error: {
+        color: 'red'
     }
 })
 

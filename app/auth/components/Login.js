@@ -1,7 +1,7 @@
 import { View, TextInput, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
 
-const Login = ({setProcess}) => {
+const Login = ({ setProcess }) => {
 
     const [errorMsg, setErrorMsg] = useState('')
     const [mail, setMail] = useState('');
@@ -33,32 +33,34 @@ const Login = ({setProcess}) => {
             console.log(err, errorMsg)
         }
     }
+
     return (
-                <View style={styles.loginForm}>
-                    <Text>Login</Text>
-                    <TextInput
-                        style={styles.input}
-                        editable
-                        placeholder='johndoe@mail.com'
-                        placeholderTextColor="#808080" />
+        <View style={styles.loginForm}>
+            <Text>Login</Text>
+            <TextInput
+                keyboardType='email'
+                style={styles.input}
+                editable
+                placeholder='johndoe@mail.com'
+                placeholderTextColor="#808080" />
 
-                    <TextInput
-                        secureTextEntry={true}
-                        style={styles.input}
-                        editable
-                        placeholder='Password'
-                        placeholderTextColor="#808080"
-                    />
+            <TextInput
+                secureTextEntry={true}
+                style={styles.input}
+                editable
+                placeholder='Password'
+                placeholderTextColor="#808080"
+            />
 
-                    <Button onPress={() => sendLoginData()} title='Login' />
+            <Button onPress={() => sendLoginData()} title='Login' />
 
-                    <Text>
-                        Not a member?
-                    </Text>
-                    <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
-                        <Text style={styles.login}>Create Account</Text>
-                    </TouchableOpacity>
-                </View>
+            <Text>
+                Not a member?
+            </Text>
+            <TouchableOpacity onPress={() => setProcess('register')} style={styles.appButtonContainer}>
+                <Text style={styles.login}>Create Account</Text>
+            </TouchableOpacity>
+        </View>
     );
 }
 

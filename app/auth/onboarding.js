@@ -26,7 +26,7 @@ const Onboarding = () => {
                 } else {
                     console.log('Undefined')
                 }
-            }, 5000)
+            }, 1000)
         }
         getToken();
     }, [])
