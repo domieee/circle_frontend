@@ -26,6 +26,7 @@ const Login = ({ setProcess }) => {
             })
             if (response.ok) {
                 const userID = await response.json()
+                console.log(userID)
                 await AsyncStorage.setItem('userID', userID);
                 router.push('/home/feed')
             } else if (response.statusCode === 400) {
