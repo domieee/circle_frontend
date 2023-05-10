@@ -20,7 +20,6 @@ const Login = ({ setProcess }) => {
                     password: password,
                 })
             })
-            console.log(await response.json())
             if (response.ok) {
                 const userID = await response.json()
                 await AsyncStorage.setItem('userID', userID);
