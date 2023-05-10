@@ -18,7 +18,7 @@ const Onboarding = () => {
                             router.push('/home/feed')
                         } else {
                             console.log('User isn`t logged in')
-                            router.push('/auth/login')
+                            router.push('/auth/validation')
                         }
                     } catch (err) {
                         console.log('Error retrieving token: ', err)
