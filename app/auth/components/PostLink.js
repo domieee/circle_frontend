@@ -2,20 +2,25 @@ import { ScrollView, Text, StyleSheet,Image, StatusBar,View } from 'react-native
 import React, { useEffect, useState ,useRef} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useRouter } from 'expo-router';
 
 
-
-const PostLink = ({postImage,postId}) => {
+const PostLink = ({postImage,setRenderMode,postId,setPostId}) => {
 
     const navigation = useNavigation()
    
+    const clickHandler = () => {
+        setRenderMode("details")
+        setPostId(postId)
+    }
+
     return (
         <>
         {/* todo: 
         link to post details page 
         links on profile page
         */}
-            <TouchableOpacity onPress={() => navigation.navigate('postDetails')}>
+            <TouchableOpacity onPress={() => clickHandler()}>
             <Image 
             style={styles.postImage} 
             source={{ uri: postImage }} />

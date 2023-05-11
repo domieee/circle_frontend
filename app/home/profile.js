@@ -5,6 +5,13 @@ import PostLink from '../auth/components/PostLink';
 
 const Profile = () => {
 
+    const [renderMode,setRenderMode] = useState("profile")
+    console.log(renderMode)
+    const [postId,setPostId] = useState()
+    console.log(postId)
+
+
+
     const [profileData,setProfileData] = useState([])
     const [profileId,setProfileId] = useState()
 
@@ -90,6 +97,9 @@ const Profile = () => {
                             <PostLink
                             key={post._id}
                             postImage={post.postImage}
+                            postId={post._id}
+                            setRenderMode={setRenderMode}
+                            setPostId={setPostId}
                             />
                     )
                 })}
