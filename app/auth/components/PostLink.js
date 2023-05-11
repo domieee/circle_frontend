@@ -11,6 +11,10 @@ const PostLink = ({postImage,postId}) => {
    
     return (
         <>
+        {/* todo: 
+        link to post details page 
+        links on profile page
+        */}
             <TouchableOpacity onPress={() => navigation.navigate('postDetails')}>
             <Image 
             style={styles.postImage} 
