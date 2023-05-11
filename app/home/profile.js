@@ -44,28 +44,29 @@ const Profile = () => {
     console.log("profileData?.posts:", profileData?.posts);
     console.log("profileData?.posts.length:", profileData?.followingList?.length);
     return (
-        <View>
+        <View style={styles.pageContainer}>
             <View style={styles.profileContainer}>
                 <Image style={styles.imageProfile} source={{ uri: profileData?.profileImage }} />
-                <Text>{profileData?.fullName}</Text>
-                <Text>{profileData?.userDescription}</Text>
+                <Text style={styles.userName}>{profileData?.fullName}</Text>
+                <Text style={styles.jobTitle}>{profileData?.jobTitle}</Text>
+                <Text style={styles.userDescription}>{profileData?.userDescription}</Text>
                     <TouchableOpacity onPress={handlePress}>
-                        <Text>{profileData?.website}</Text>
+                        <Text style={styles.websiteLink}>{profileData?.website}</Text>
                     </TouchableOpacity>
             </View>
 
             <View style={styles.userStatsContainer}>
                 <View style={styles.userStats}>
-                    <Text>{profileData?.posts?.length}</Text>
-                    <Text>Posts</Text>
+                    <Text style={styles.statsText}>{profileData?.posts?.length}</Text>
+                    <Text style={styles.statsDescription}>Posts</Text>
+                </View>
+                <View style={styles.statsBorder}>
+                    <Text style={styles.statsText}>{profileData?.followerList?.length}</Text>
+                    <Text style={styles.statsDescription}>Followers</Text>
                 </View>
                 <View style={styles.userStats}>
-                    <Text>{profileData?.followerList?.length}</Text>
-                    <Text>Followers</Text>
-                </View>
-                <View style={styles.userStats}>
-                    <Text>{profileData?.followingList?.length}</Text>
-                    <Text>Following</Text>
+                    <Text style={styles.statsText}>{profileData?.followingList?.length}</Text>
+                    <Text style={styles.statsDescription}>Following</Text>
                 </View>
             </View>
         </View>
@@ -75,26 +76,68 @@ const Profile = () => {
 export default Profile
 
 const styles = StyleSheet.create({
+    pageContainer:{
+        paddingLeft:25,
+        paddingRight:25
+    },
     imageProfile: {
-        width: 50,
-        height: 50,
+        width: 170,
+        height: 170,
         borderRadius: 200,
         marginRight: "auto",
-        marginLeft:"auto"
+        marginLeft:"auto",
+        marginTop:20,
+        marginBottom:10
 
+    },
+    jobTitle:{
+        marginBottom:15,
+    },
+    userDescription:{
+        marginBottom:10
+    },
+    userName:{
+        fontWeight:"bold",
+        fontSize:25,
+        marginBottom:10
     },
     profileContainer:{
         textAlign: 'center',
         paddingLeft:30,
         paddingRight:30
     },
+    websiteLink:{
+        color:"#799df9",
+        fontWeight:"bold",
+        fontSize:12,
+        marginBottom:20
+    },
     userStatsContainer:{
         flex:1,
         flexDirection:"row",
-        justifyContent:"space-evenly"
+        justifyContent:"center",
+        paddingBottom:20,
+        borderBottomWidth:1,
+
     },
     userStats:{
-        textAlign:'center'
+        textAlign:'center',
+    },
+    statsBorder:{
+        borderLeftWidth:1,
+        borderRightWidth:1,
+        textAlign:'center',
+        paddingLeft:40,
+        paddingRight:40,
+        marginLeft:40,
+        marginRight:40
+    },
+    statsText:{
+        fontSize:20,
+        fontWeight:"bold"
+    },
+    statsDescription:{
+        fontSize:15
     }
 
 }); 
