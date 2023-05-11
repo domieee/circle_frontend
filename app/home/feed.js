@@ -1,4 +1,4 @@
-import { ScrollView, Text, StyleSheet, StatusBar } from 'react-native'
+import { ScrollView, Text, StyleSheet, StatusBar,View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '.././auth/components/Post.js'
@@ -8,53 +8,64 @@ const Feed = () => {
     const [user, setUser] = useState()
     const [feed, setFeed] = useState([])
 
+    const handleReq = (json, userID) => {
+        setFeed(json);
+        setUser(userID);
+    };
+
     useEffect(() => {
         const getUserIdFromStorage = async () => {
             try {
                 const userID = await AsyncStorage.getItem('userID');
                 const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/get-feed', {
-                    method: "POST",
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json"
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        userId: userID
-                    })
-                })
-                const json = await response.json()
-                setFeed(json)
-                setUser(userID)
+                        userId: userID,
+                    }),
+                });
+                const json = await response.json();
+                
+                setFeed(json);
+                setUser(userID); // Move setUser outside the asynchronous function
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-        }
-        getUserIdFromStorage()
-    }, [])
+        };
+        
+
+        getUserIdFromStorage();
+    }, []);
 
     return (
         <>
+            <View>
+            <Post />
+            </View>
             
-            <ScrollView style={styles.login}>
-                {feed.map(post => {
-                    console.log(post)
+{            <ScrollView style={styles.login}>
+                {feed.map((post) => {
+                    console.log(post);
                     return (
                         <>
-                            <Text>{post.userName}</Text>
+                            <Text>{post.fullName}</Text>
                             <Text>{post.jobTitle}</Text>
-                            <Text>{post.comments.length}</Text>
+                            <Text>{post.posts.length}</Text>
                             <Text>{post.likes}</Text>
                         </>
-                    )
+                    );
                 })}
-            </ScrollView>
+            </ScrollView>}
         </>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     login: {
         flex: 1,
-
+        
     }
 })
 
