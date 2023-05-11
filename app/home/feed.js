@@ -2,6 +2,7 @@ import { ScrollView, Text, StyleSheet, StatusBar,View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '.././auth/components/Post.js'
+import { v4 as uuidv4 } from 'uuid';
 
 const Feed = () => {
 
@@ -41,23 +42,27 @@ const Feed = () => {
 
     return (
         <>
-            <View>
-            <Post />
-            </View>
-            
-{            <ScrollView style={styles.login}>
-                {feed.map((post) => {
-                    console.log(post);
-                    return (
-                        <>
-                            <Text>{post.fullName}</Text>
-                            <Text>{post.jobTitle}</Text>
-                            <Text>{post.posts.length}</Text>
-                            <Text>{post.likes}</Text>
-                        </>
-                    );
-                })}
-            </ScrollView>}
+
+            {
+                <ScrollView style={styles.login}>
+                    {feed.map((post) => {
+                        console.log(post);
+                        return (
+                        <View>
+                            <Post 
+                            key={uuidv4()}
+                            profileImage={post.profileImage} 
+                            postImage={post.postImage}
+                            userName={post.userName} 
+                            jobTitle={post.jobTitle}
+                            likes={post.likes}
+                            comments={(post.comments.length).toString()}
+                            />
+                        </View>
+                        );
+                    })}
+                </ScrollView>
+            }
         </>
     );
 }

@@ -1,22 +1,23 @@
 import { View, Text, Image,StyleSheet } from 'react-native';
 import React from 'react'
 
-export default function Post() {
-    const imgProfile =
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60';
-    const imgPost = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+export default function Post({profileImage,postImage,userName,jobTitle,likes,comments}) {
+
   return (
       <View>
           <View style={styles.container}>
-              <Image style={styles.imageProfile} source={{ uri: imgProfile }} />
+              <Image style={styles.imageProfile} source={{ uri: profileImage }} />
               <View>
-                  <Text style={styles.text}>user_name</Text>
-                  <Text style={styles.text}>Job title</Text>
+                  <Text style={styles.text}>{userName}</Text>
+                  <Text style={styles.text}>{jobTitle}</Text>
               </View>
           </View>
           <View style={styles.postImgContainer}>
-
-          <Image style={styles.imagePost} source={{ uri: imgPost }} />
+              <Image style={styles.imagePost} source={{ uri: postImage }} />
+              <View style={styles.postStats}>
+                  <Text>{likes}</Text>
+                  <Text>{comments}</Text>
+              </View>
           </View>
       </View>
   );
@@ -26,27 +27,33 @@ export default function Post() {
 
 const styles = StyleSheet.create({
     imageProfile: {
-        width:50,
-        height:50,
-        borderRadius:200,
-        marginRight:20
+        width: 50,
+        height: 50,
+        borderRadius: 200,
+        marginRight: 20,
     },
-    postImgContainer:{
-        padding:20
+    postStats: {
+        flex: 1,
+        flexDirection: 'row',
+        gap:20
     },
-    imagePost:{
-        width:350,
-        height:250,
+    postImgContainer: {
+        padding: 20,
     },
-    container:{
-        flex:1,
-        flexDirection:"row",
-        height:10,
-        paddingLeft:10,
-        paddingTop:10,
-        alignItems:"center"
+    imagePost: {
+        width: 350,
+        height: 300,
+        borderRadius:20
     },
-    text:{
-        height:20
-    }
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        height: 10,
+        paddingLeft: 10,
+        paddingTop: 10,
+        alignItems: 'center',
+    },
+    text: {
+        height: 20,
+    },
 });
