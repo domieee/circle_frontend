@@ -45,13 +45,17 @@ const Profile = () => {
     console.log("profileData?.posts.length:", profileData?.followingList?.length);
     return (
         <View style={styles.pageContainer}>
+            <View style={styles.navBar}>
+                <Image source={require('../assets/img/logoSmall.png')}/>
+                <Text style={styles.navBarText}>{profileData?.userName}</Text>
+            </View>
             <View style={styles.profileContainer}>
                 <Image style={styles.imageProfile} source={{ uri: profileData?.profileImage }} />
                 <Text style={styles.userName}>{profileData?.fullName}</Text>
                 <Text style={styles.jobTitle}>{profileData?.jobTitle}</Text>
                 <Text style={styles.userDescription}>{profileData?.userDescription}</Text>
                     <TouchableOpacity onPress={handlePress}>
-                        <Text style={styles.websiteLink}>{profileData?.website}</Text>
+                <Text style={styles.websiteLink}>{profileData?.website}</Text>
                     </TouchableOpacity>
             </View>
 
@@ -76,6 +80,16 @@ const Profile = () => {
 export default Profile
 
 const styles = StyleSheet.create({
+    navBar:{
+        flex:1,
+        flexDirection:"row",
+        alignItems:"center"
+    },
+    navBarText:{
+        marginLeft:15,
+        fontWeight:"700",
+        fontSize:17
+    },
     pageContainer:{
         paddingLeft:25,
         paddingRight:25
@@ -118,6 +132,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         paddingBottom:20,
         borderBottomWidth:1,
+        borderBottomColor:"lightgrey"
 
     },
     userStats:{
@@ -126,6 +141,8 @@ const styles = StyleSheet.create({
     statsBorder:{
         borderLeftWidth:1,
         borderRightWidth:1,
+        borderLeftColor:"lightgrey",
+        borderRightColor:"lightgrey",
         textAlign:'center',
         paddingLeft:40,
         paddingRight:40,
@@ -133,7 +150,7 @@ const styles = StyleSheet.create({
         marginRight:40
     },
     statsText:{
-        fontSize:20,
+        fontSize:21,
         fontWeight:"bold"
     },
     statsDescription:{
