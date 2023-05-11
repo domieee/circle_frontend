@@ -1,18 +1,22 @@
 import {TouchableOpacity, Linking, View, Text ,StyleSheet,Image} from 'react-native'
 import React, { useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PostLink from '../auth/components/PostLink';
 
 const Profile = () => {
 
     const [profileData,setProfileData] = useState([])
     const [profileId,setProfileId] = useState()
 
+    const [posts,setPosts] = useState([])
+
+
         const handlePress = () => {
         Linking.openURL(`${profileData?.website}`);
         };
 
        useEffect(() => {
-        const getUserIdFromStorage = async () => {
+        const getUserData = async () => {
             try {
                 const userId = await AsyncStorage.getItem('userID');
                 const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/get-profile', {
@@ -24,25 +28,30 @@ const Profile = () => {
                         /******************************************* ändern zu userId variable !!!! ***********************************************************************************************/
                         userId: "645bfb6c5125087f1a3bdc5e",
                     }),
-                });
+                })
                 const userData = await response.json();
                 
-                setProfileData(userData);
-                setProfileId(userID)
+                    setProfileData(userData);
+                    /* setProfileId(userID) */
+                    setPosts(userData?.posts)
+                    
+                
+                
+
+                
             } catch (error) {
                 console.log(error);
             }
         };
         
-        
-        getUserIdFromStorage();
+        getUserData();
     }, [])
     
-    console.log(profileId)
-  /*   console.log((profileData?.posts).length) */
-    console.log("profileData:", profileData);
-    console.log("profileData?.posts:", profileData?.posts);
-    console.log("profileData?.posts.length:", profileData?.followingList?.length);
+    /* console.log(profileId) */
+    
+    
+  /*   console.log("profileData?.posts:", profileData?.posts); */
+    /* console.log("profileData?.posts.length:", profileData?.followingList?.length); */
     return (
         <View style={styles.pageContainer}>
             <View style={styles.navBar}>
@@ -73,6 +82,19 @@ const Profile = () => {
                     <Text style={styles.statsDescription}>Following</Text>
                 </View>
             </View>
+
+            <View>
+                <View  style={styles.postsContainer}>
+                {posts?.map((post) => {
+                    return(
+                            <PostLink
+                            key={post._id}
+                            postImage={post.postImage}
+                            />
+                    )
+                })}
+                </View>
+            </View>
         </View>
     )
 }
@@ -80,6 +102,14 @@ const Profile = () => {
 export default Profile
 
 const styles = StyleSheet.create({
+    postsContainer:{
+        flex:1,
+        flexDirection:"row",
+        gap:5,
+        justifyContent:"flex-start",
+        flexWrap:"wrap"
+        
+    },
     navBar:{
         flex:1,
         flexDirection:"row",
@@ -132,7 +162,8 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         paddingBottom:20,
         borderBottomWidth:1,
-        borderBottomColor:"lightgrey"
+        borderBottomColor:"lightgrey",
+        marginBottom:10
 
     },
     userStats:{
