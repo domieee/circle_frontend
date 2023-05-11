@@ -48,7 +48,7 @@ const Feed = () => {
                 const json = await response.json();
                 
                 setFeed(json);
-                setUser(userID); // Move setUser outside the asynchronous function
+                setUser(userID)
             } catch (error) {
                 console.log(error);
             }
