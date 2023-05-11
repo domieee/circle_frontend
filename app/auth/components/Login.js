@@ -9,6 +9,7 @@ const Login = ({ setProcess }) => {
     const [password, setPassword] = useState('');
 
     const router = useRouter();
+    console.log('asdsd')
 
     const sendLoginData = async () => {
         try {
