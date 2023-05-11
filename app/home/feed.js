@@ -1,21 +1,39 @@
 import { ScrollView, Text, StyleSheet, StatusBar,View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '.././auth/components/Post.js'
-import { v4 as uuidv4 } from 'uuid';
+
 
 const Feed = () => {
 
+
+    const scrollViewRef = useRef(null)
     const [user, setUser] = useState()
     const [feed, setFeed] = useState([])
 
-    const handleReq = (json, userID) => {
-        setFeed(json);
-        setUser(userID);
-    };
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    const [reload,setReload] = useState(false)
+
+
+    console.log(scrollPosition)
+    
+
+    const handleScroll = (event) => {
+    const { contentOffset } = event.nativeEvent;
+    setScrollPosition(contentOffset.y);
+    if(scrollPosition < 18){
+        setReload(true)
+        console.log(reload)
+        scrollViewRef.current.scrollTo({ y: 20, animated: true })
+    }else{
+        setReload(false)
+    }
+  };
 
     useEffect(() => {
         const getUserIdFromStorage = async () => {
+            console.log("rerender")
             try {
                 const userID = await AsyncStorage.getItem('userID');
                 const response = await fetch('https://circle-backend-2-s-guettner.vercel.app/api/v1/get-feed', {
@@ -38,19 +56,22 @@ const Feed = () => {
         
 
         getUserIdFromStorage();
-    }, []);
+    }, [reload]);
 
     return (
         <>
 
             {
-                <ScrollView style={styles.login}>
+                <ScrollView ref={scrollViewRef} contentOffset={{ y: 20 }} onScroll={handleScroll} overScrollMode="always" style={styles.scrollView}>
+{/*                     <View>
+                        <Text>Hello</Text>
+                    </View> */}
                     {feed.map((post) => {
-                        console.log(post);
+                        /* console.log(post); */
                         return (
-                        <View>
+                            
+                        <View style={styles.postContainer} key={post._id}>
                             <Post 
-                            key={uuidv4()}
                             profileImage={post.profileImage} 
                             postImage={post.postImage}
                             userName={post.userName} 
@@ -68,9 +89,18 @@ const Feed = () => {
 }
 
 const styles = StyleSheet.create({
-    login: {
+    scrollView: {
         flex: 1,
+        marginTop:20,
+        paddingTop:20
         
+        
+    },
+    postContainer:{
+        paddingTop:20
+    },
+    placeHolder:{
+        height:50,
     }
 })
 
