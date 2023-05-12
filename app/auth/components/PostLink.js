@@ -15,18 +15,14 @@ const PostLink = ({postImage,setRenderMode,postId,setPostId}) => {
     }
 
     return (
-        <>
-        {/* todo: 
-        link to post details page 
-        links on profile page
-        */}
+        
             <TouchableOpacity onPress={() => clickHandler()}>
             <Image 
             style={styles.postImage} 
             source={{ uri: postImage }} />
             </TouchableOpacity>
 
-        </>
+        
     )
     
 

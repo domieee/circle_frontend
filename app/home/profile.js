@@ -2,6 +2,7 @@ import {TouchableOpacity, Linking, View, Text ,StyleSheet,Image} from 'react-nat
 import React, { useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PostLink from '../auth/components/PostLink';
+import { StatusBar } from 'react-native';
 
 const Profile = () => {
 
@@ -33,7 +34,7 @@ const Profile = () => {
                     },
                     body: JSON.stringify({
                         /******************************************* ändern zu userId variable !!!! ***********************************************************************************************/
-                        userId: "645bfb6c5125087f1a3bdc5e",
+                        userId: "eaebd4bb3eba2f6e2ce93182",
                     }),
                 })
                 const userData = await response.json();
@@ -76,23 +77,28 @@ const Profile = () => {
             </View>
 
             <View style={styles.userStatsContainer}>
+                
                 <View style={styles.userStats}>
                     <Text style={styles.statsText}>{profileData?.posts?.length}</Text>
                     <Text style={styles.statsDescription}>Posts</Text>
                 </View>
+                
                 <View style={styles.statsBorder}>
                     <Text style={styles.statsText}>{profileData?.followerList?.length}</Text>
                     <Text style={styles.statsDescription}>Followers</Text>
                 </View>
+                
                 <View style={styles.userStats}>
                     <Text style={styles.statsText}>{profileData?.followingList?.length}</Text>
                     <Text style={styles.statsDescription}>Following</Text>
                 </View>
+
+              
             </View>
 
             <View>
-                <View  style={styles.postsContainer}>
-                {posts?.map((post) => {
+                <View style={styles.postsContainer} >
+                {posts && posts.map((post) => {
                     return(
                             <PostLink
                             key={post._id}
@@ -113,7 +119,7 @@ export default Profile
 
 const styles = StyleSheet.create({
     postsContainer:{
-        flex:1,
+        
         flexDirection:"row",
         gap:5,
         justifyContent:"flex-start",
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
         
     },
     navBar:{
-        flex:1,
+        
         flexDirection:"row",
         alignItems:"center"
     },
@@ -167,12 +173,13 @@ const styles = StyleSheet.create({
         marginBottom:20
     },
     userStatsContainer:{
-        flex:1,
+        
         flexDirection:"row",
+        
         justifyContent:"center",
         paddingBottom:20,
         borderBottomWidth:1,
-        borderBottomColor:"lightgrey",
+        
         marginBottom:10
 
     },
