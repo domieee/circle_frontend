@@ -97,6 +97,8 @@ const Register = ({ setProcess }) => {
     );
 }
 
+
+
 const styles = StyleSheet.create({
     loginForm: {
         flex: 1,
