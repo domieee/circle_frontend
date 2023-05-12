@@ -1,4 +1,4 @@
-import {TouchableOpacity, Linking, View, Text ,StyleSheet,Image} from 'react-native'
+import {TouchableOpacity, Linking, View, Text ,StyleSheet,Image,ScrollView} from 'react-native'
 import React, { useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PostLink from '../auth/components/PostLink';
@@ -34,11 +34,11 @@ const Profile = () => {
                     },
                     body: JSON.stringify({
                         /******************************************* ändern zu userId variable !!!! ***********************************************************************************************/
-                        userId: "eaebd4bb3eba2f6e2ce93182",
+                        userId: "645e3976d3ae8d816b2367b1",
                     }),
                 })
                 const userData = await response.json();
-                
+                   if(userData) console.log(userData)
                     setProfileData(userData);
                     /* setProfileId(userID) */
                     setPosts(userData?.posts)
@@ -57,7 +57,7 @@ const Profile = () => {
     
     /* console.log(profileId) */
     
-    
+    console.log(profileData.followerList)
   /*   console.log("profileData?.posts:", profileData?.posts); */
     /* console.log("profileData?.posts.length:", profileData?.followingList?.length); */
     return (
@@ -67,13 +67,13 @@ const Profile = () => {
                 <Text style={styles.navBarText}>{profileData?.userName}</Text>
             </View>
             <View style={styles.profileContainer}>
-                <Image style={styles.imageProfile} source={{ uri: profileData?.profileImage }} />
+                <Image style={styles.imageProfile} source={{ uri: profileData?.avatarMidsize }} />
                 <Text style={styles.userName}>{profileData?.fullName}</Text>
                 <Text style={styles.jobTitle}>{profileData?.jobTitle}</Text>
                 <Text style={styles.userDescription}>{profileData?.userDescription}</Text>
-                    <TouchableOpacity onPress={handlePress}>
+{/*                     <TouchableOpacity onPress={handlePress}>
                 <Text style={styles.websiteLink}>{profileData?.website}</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
             </View>
 
             <View style={styles.userStatsContainer}>
@@ -84,7 +84,7 @@ const Profile = () => {
                 </View>
                 
                 <View style={styles.statsBorder}>
-                    <Text style={styles.statsText}>{profileData?.followerList?.length}</Text>
+                    <Text style={styles.statsText}>{profileData?.followerList?.length.toString()}</Text>
                     <Text style={styles.statsDescription}>Followers</Text>
                 </View>
                 
@@ -96,10 +96,11 @@ const Profile = () => {
               
             </View>
 
-            <View>
-                <View style={styles.postsContainer} >
-                {posts && posts.map((post) => {
+            
+              <ScrollView contentOffset={{ y: 0 }}  showsVerticalScrollIndicator={false} overScrollMode="always"  style={styles.postsContainer} >
+                {posts.map((post) => {
                     return(
+                        <View style={styles.postLinkContainer}>
                             <PostLink
                             key={post._id}
                             postImage={post.postImage}
@@ -107,10 +108,12 @@ const Profile = () => {
                             setRenderMode={setRenderMode}
                             setPostId={setPostId}
                             />
+                        </View>
+                        
                     )
                 })}
-                </View>
-            </View>
+                </ScrollView>
+            
         </View>
     )
 }
@@ -120,11 +123,19 @@ export default Profile
 const styles = StyleSheet.create({
     postsContainer:{
         
-        flexDirection:"row",
-        gap:5,
-        justifyContent:"flex-start",
-        flexWrap:"wrap"
+       height: "100%" 
+ 
         
+/*         gap:5,
+        justifyContent:"flex-start",
+        flexWrap:"wrap" */
+        
+    },
+    postLinkContainer:{
+      /*   height:110,
+        width:110,
+        borderRadius:10, */
+       
     },
     navBar:{
         
@@ -152,17 +163,21 @@ const styles = StyleSheet.create({
     },
     jobTitle:{
         marginBottom:15,
+        textAlign:"center"
     },
     userDescription:{
-        marginBottom:10
+        marginBottom:10,
+        textAlign: 'center',
+        
     },
     userName:{
         fontWeight:"bold",
         fontSize:25,
-        marginBottom:10
+        marginBottom:10,
+        textAlign:"center"
+        
     },
     profileContainer:{
-        textAlign: 'center',
         paddingLeft:30,
         paddingRight:30
     },
@@ -179,8 +194,8 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         paddingBottom:20,
         borderBottomWidth:1,
-        
-        marginBottom:10
+        borderBottomColor:"lightgrey",
+        /* marginBottom:10 */
 
     },
     userStats:{

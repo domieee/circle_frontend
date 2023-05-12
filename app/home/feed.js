@@ -46,7 +46,7 @@ const Feed = () => {
                     }),
                 });
                 const json = await response.json();
-                
+                console.log(json)
                 setFeed(json);
                 setUser(userID)
             } catch (error) {
@@ -62,7 +62,7 @@ const Feed = () => {
         <>
 
             {
-                <ScrollView ref={scrollViewRef} contentOffset={{ y: 20 }} onScroll={handleScroll} overScrollMode="always" style={styles.scrollView}>
+                <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false} contentOffset={{ y: 20 }} onScroll={handleScroll} overScrollMode="always" style={styles.scrollView}>
 {/*                     <View>
                         <Text>Hello</Text>
                     </View> */}
@@ -72,10 +72,10 @@ const Feed = () => {
                             
                         <View style={styles.postContainer} key={post._id}>
                             <Post 
-                            profileImage={post.profileImage} 
+                            profileImage={post.creatorAvatarSmall} 
                             postImage={post.postImage}
-                            userName={post.userName} 
-                            jobTitle={post.jobTitle}
+                            userName={post.postCreator} 
+                            jobTitle={post.postCreatorJob}
                             likes={post.likes}
                             comments={(post.comments.length).toString()}
                             />

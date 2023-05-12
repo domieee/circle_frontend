@@ -16,11 +16,12 @@ const PostLink = ({postImage,setRenderMode,postId,setPostId}) => {
 
     return (
         
-            <TouchableOpacity onPress={() => clickHandler()}>
-            <Image 
-            style={styles.postImage} 
-            source={{ uri: postImage }} />
-            </TouchableOpacity>
+            <View style={styles.postContainer} >
+                <Image 
+                style={styles.postImage} 
+                source={{ uri: postImage }} />
+            </View>
+            
 
         
     )
@@ -32,15 +33,15 @@ const styles = StyleSheet.create({
     postImage: {
         height:110,
         width:110,
-        borderRadius:10
+        borderRadius:10,
+        
         
         
     },
     postContainer:{
-        paddingTop:20
-    },
-    placeHolder:{
-        height:50,
+        paddingTop:20,
+        width:110,
+        height:110
     }
 })
 
