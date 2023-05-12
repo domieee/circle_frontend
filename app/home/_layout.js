@@ -9,10 +9,10 @@ import Profile from './profile.js';
 
 const Tab = createBottomTabNavigator();
 
-const [hidden, setHidden] = useState(false);
+/* const [hidden, setHidden] = useState(false);
 const [statusBarStyle, setStatusBarStyle] = useState('default');
-const [statusBarTransition, setStatusBarTransition] = useState('fade');
-
+const [statusBarTransition, setStatusBarTransition] = useState('fade'); */
+ 
 export default () => {
     return (
         <>
