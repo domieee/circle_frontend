@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Button, Text, Image, StyleSheet, StatusBar } from 'react-native';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +13,7 @@ const Tab = createBottomTabNavigator();
 /* const [hidden, setHidden] = useState(false);
 const [statusBarStyle, setStatusBarStyle] = useState('default');
 const [statusBarTransition, setStatusBarTransition] = useState('fade'); */
- 
+
 export default () => {
     return (
         <>
@@ -20,7 +21,6 @@ export default () => {
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
-
                         if (route.name === 'Home') {
                             iconName = focused ? 'ios-home' : 'ios-home-outline';
                         } else if (route.name === 'Suche') {
@@ -58,7 +58,7 @@ export default () => {
                     name="Upload"
                     component={Upload}
                     options={{
-                        tabBarLabel: 'Upload',
+                        tabBarLabel: 'Upload'
                     }}
                 />
                 <Tab.Screen
